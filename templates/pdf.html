@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    PDF
+{% endblock %}
+
+{% block main %}
+
+<button class="printInvisible btn btn-info" onclick="window.print();return false;" >PRINT</button>
+<br><br><br>
+ <h1 class="mb-3">Events</h1>
+    <table class="table table-striped" style="text-align: left;" id="events_table">
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for field in events %}
+                <tr>
+                    <td width="10%">
+                        {{ field["type"] }}
+                    </td>
+                    <td width="10%">
+                        {{ field["name"] }}
+                    </td>
+                    <td width="15%">
+                        <b>{{ field["date"] }}</b> <br> {{ field["time_start"] }} - {{ field["time_end"] }}
+                    </td>
+                    <td width="15%">
+                        {{ field["location"]}}
+                    </td>
+                    <td width="40%">
+                        {{ field["shortdescription"]}}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

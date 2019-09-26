@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your Events
+{% endblock %}
+
+{% block main %}
+
+    <!-- http://getbootstrap.com/docs/4.1/content/typography/ -->
+    <h1 class="mb-3">Your Events</h1>
+    <table class="table table-striped" style="text-align: left;" id="events_table">
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Edit Event</th>
+                <th>Delete Event</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for field in events %}
+                <tr>
+                    <td>
+                        {{ field["type"] }}
+                    </td>
+                    <td>
+                        {{ field["name"] }}
+                    </td>
+                    <td>
+                        {{ field["date"] }} {{ field["time_start"] }} - {{ field["time_end"] }}
+                    </td>
+                    <td>
+                        {{ field["location"]}}
+                    </td>
+                    <td>
+                        {{ field["shortdescription"]}}
+                    </td>
+                    <td>
+                        <form action="/yourevents" method="post">
+                            <button class="btn btn-info" name="edit" value="{{ field['event_id'] }}">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/yourevents" method="post">
+
+                            <button class="btn btn-danger" name="delete" value="{{ field['event_id'] }}" Onclick="ConfirmDelete()">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

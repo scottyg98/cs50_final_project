@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit Event
+{% endblock %}
+
+{% block main %}
+<div class="card bg-light mb-3" style="max-width: 80%; margin:0 auto;">
+    <div class="card-header"><h3><b>Edit your event:</b> <em>{{ event[0]['name'] }}</em></h3></div>
+    <form name="editevent" action="/editevent" method="post" style="text-align: left; padding: 0em 1em 2em 1em;">
+        <br>
+        <div class="form-group">
+            <label><b>Event Name</b></label>
+            <br>
+            <input class="form-control" name="name" placeholder="Event Name" type="text" value="{{ event[0]['name'] }}" required>
+        </div>
+
+        <div class="form-group">
+            <label><b>Service</b></label>
+            <br>
+                <select class="form-control" name="type" required>
+                    <option selected="" value="{{ event[0]['type'] }}">{{ event[0]['type'] }}</option>
+                    <option value="Food">Food</option>
+                    <option value="Clothes">Clothes</option>
+                    <option value="Shelter">Shelter</option>
+                    <option value="Other (read description)">Other (describe in description)</option>
+                </select>
+            </div>
+
+        <div class="form-group">
+            <label><b>Event Date</b></label>
+            <br>
+            <input class="form-control" name="date" placeholder="Date and Time" type="date" value="{{ event[0]['date'] }}" required>
+            <small id="emailHelp" class="form-text text-muted">Event Date</small>
+        </div>
+
+        <label><b>Time</b></label>
+        <br>
+        <div class="row center-block">
+          <div class="col" style="text-align: left">
+            <div class="form-group">
+                <input class="form-control" name="time_start" placeholder="Start Time" type="time" value="{{ event[0]['time_start'] }}" required>
+                <small id="emailHelp" class="form-text text-muted">Start Time</small>
+            </div>
+          </div>
+          <div class="col" style="text-align: right">
+            <div class="form-group">
+                <input class="form-control" name="time_end" placeholder="End Time" type="time" value="{{ event[0]['time_end'] }}" required>
+                <small id="emailHelp" class="form-text text-muted">End Time</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label><b>Expiration</b></label>
+            <br>
+            <input class="form-control" name="expiration" placeholder="Expiration Date" type="date" value="{{ event[0]['expiration'] }}" required>
+            <small id="emailHelp" class="form-text text-muted">Expiration Date</small>
+        </div>
+
+        <div class="form-group">
+            <label><b>Repeat Weekly</b></label>
+            <br>
+            {% if event[0]['repeat'] == "Yes" %}
+                <input type="radio" name="repeat" value="Yes" checked>
+                    <label for="exampleSelect1">Yes</label>
+                <br>
+
+                <input type="radio" name="repeat" value="No">
+                    <label for="exampleSelect1">No</label>
+                <br>
+
+            {% elif event[0]['repeat'] == "No" %}
+                <input type="radio" name="repeat" value="Yes">
+                    <label for="exampleSelect1">Yes</label>
+                <br>
+
+                <input type="radio" name="repeat" value="No" checked>
+                    <label for="exampleSelect1">No</label>
+                <br>
+
+            {% else %}
+                <input type="radio" name="repeat" value="Yes">
+                    <label for="exampleSelect1">Yes</label>
+                <br>
+
+                <input type="radio" name="repeat" value="No">
+                    <label for="exampleSelect1">No</label>
+                <br>
+
+            {% endif %}
+
+            <small id="emailHelp" class="form-text text-muted">Repeat Weekly</small>
+        </div>
+
+        <label><b>Address</b></label>
+        <br>
+        <div class="row center-block">
+          <div class="col">
+            <div class="form-group">
+                <input class="form-control" name="location_pt_one" placeholder="Address Line 1" type="text" value="{{ event[0]['location'] }}" required>
+                <small id="emailHelp" class="form-text text-muted">Street address</small>
+            </div>
+          </div>
+          <div class="col" style="text-align: left">
+            <div class="form-group">
+                <label style="margin-top:0.5em">New Haven, Connecticut</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label><b>Event Description</b></label>
+            <br>
+            <textarea class="form-control" name="shortdescription" rows="5" placeholder="Description" required>{{ event[0]['shortdescription'] }}</textarea>
+        </div>
+
+
+        <button class="btn btn-primary" type="submit">Change</button>
+</div>
+</div>
+    </form>
+{% endblock %}

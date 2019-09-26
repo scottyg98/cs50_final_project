@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Map
+{% endblock %}
+
+{% block main %}
+
+<h1 class="mb-3">Map of Events</h1>
+<div id="map_div" style="height: 50em; width: 100%"></div>
+
+
+<script type="text/javascript">
+  // creates a map with all the data from the table
+  google.charts.load('current', {
+    'packages': ['map'],
+    // Note: you will need to get a mapsApiKey for your project.
+    // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+    'mapsApiKey': 'AIzaSyDOmBU3QCtNepdBawwszJGEHxwMPiXFvwU'
+  });
+  google.charts.setOnLoadCallback(drawMap);
+
+  function drawMap () {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Address');
+    data.addColumn('string', 'Name');
+    var array = JSON.parse('{{ locations | safe}}');
+    data.addRows(array);
+  var options = {
+    showTooltip: true,
+    showInfoWindow: true,
+    mapType: 'normal',
+    useMapTypeControl: true,
+  };
+    var map = new google.visualization.Map(document.getElementById('map_div'));
+    map.draw(data, options);
+  }
+
+</script>
+
+{% endblock %}

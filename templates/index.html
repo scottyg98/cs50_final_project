@@ -1,0 +1,146 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    All Events
+{% endblock %}
+
+{% block main %}
+
+
+<div class="card card-tabs-2">
+  <div class="card-header">
+    <ul class="nav nav-tabs">
+      <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tab-all" role="tab">All</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-food" role="tab">Food</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-clothes" role="tab">Clothes</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-shelter" role="tab">Shelter</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-other" role="tab">Other</a></li>
+    </ul>
+  </div>
+
+  <div class="card-block">
+    <div class="tab-content">
+
+      <div class="tab-pane active" id="tab-all">
+        <h2 class="card-title">All Events</h2>
+          <!--DISPLAY ALL EVENTS-->
+          <div class="card-columns">
+            {% for field in events %}
+              <div class="card bg-light">
+                <div class="card-header"><h4><b>{{ field["name"] }}:</b> {{ field["type"] }}</h4></div>
+                {% if field["type"] == "Food" %}
+                  <img class="homeImage card-img-top" src="/static/food.jpg">
+                {% elif field["type"] == "Clothes" %}
+                  <img class="homeImage card-img-top" src="/static/clothes.jpg">
+                {% elif field["type"] == "Shelter" %}
+                  <img class="homeImage card-img-top" src="/static/shelter.jpg">
+                {% elif field["type"] == "Other (read description)" %}
+                  <img class="homeImage card-img-top" src="/static/other.jpg">
+                {% else %}
+                  <img class="homeImage card-img-top" src="/static/unknown.jpg">
+                {% endif %}
+                <p class="card-text small" style="margin-top:1.6em">{{ field["location"] }}</p>
+                <hr>
+                <div class="card-body" style="margin-top:-1em">
+                  <p class="card-text"><b>{{ field["date"] }}</b></p>
+                  <p class="card-text">{{ field["time_start"] }} - {{ field["time_end"] }}</p>
+                  <p class="card-text">{{ field["shortdescription"]}}</p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+      </div>
+
+      <div class="tab-pane" id="tab-food">
+        <h2 class="card-title">Food</h2>
+          <!--DISPLAY FOOD ONLY-->
+          <div class="card-columns">
+            {% for field in events %}
+              {% if field["type"] == "Food" %}
+                <div class="card bg-light">
+                  <div class="card-header"><h4><b>{{ field["name"] }}:</b> {{ field["type"] }}</h4></div>
+                  <img class="homeImage card-img-top" src="/static/food.jpg">
+                  <p class="card-text small" style="margin-top:1.6em">{{ field["location"] }}</p>
+                  <hr>
+                  <div class="card-body" style="margin-top:-1em">
+                    <p class="card-text"><b>{{ field["date"] }}</b></p>
+                    <p class="card-text">{{ field["time_start"] }} - {{ field["time_end"] }}</p>
+                    <p class="card-text">{{ field["shortdescription"]}}</p>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+      </div>
+
+      <div class="tab-pane" id="tab-clothes">
+        <h2 class="card-title">Clothes</h2>
+          <!--DISPLAY FOOD ONLY-->
+          <div class="card-columns">
+            {% for field in events %}
+              {% if field["type"] == "Clothes" %}
+                <div class="card bg-light">
+                  <div class="card-header"><h4><b>{{ field["name"] }}:</b> {{ field["type"] }}</h4></div>
+                  <img class="homeImage card-img-top" src="/static/clothes.jpg">
+                  <p class="card-text small" style="margin-top:1.6em">{{ field["location"] }}</p>
+                  <hr>
+                  <div class="card-body" style="margin-top:-1em">
+                    <p class="card-text"><b>{{ field["date"] }}</b></p>
+                    <p class="card-text">{{ field["time_start"] }} - {{ field["time_end"] }}</p>
+                    <p class="card-text">{{ field["shortdescription"]}}</p>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+      </div>
+
+      <div class="tab-pane" id="tab-shelter">
+        <h2 class="card-title">Shelter</h2>
+          <!--DISPLAY SHELTER ONLY-->
+          <div class="card-columns">
+            {% for field in events %}
+              {% if field["type"] == "Shelter" %}
+                <div class="card bg-light">
+                  <div class="card-header"><h4><b>{{ field["name"] }}:</b> {{ field["type"] }}</h4></div>
+                  <img class="homeImage card-img-top" src="/static/shelter.jpg">
+                  <p class="card-text small" style="margin-top:1.6em">{{ field["location"] }}</p>
+                  <hr>
+                  <div class="card-body" style="margin-top:-1em">
+                    <p class="card-text"><b>{{ field["date"] }}</b></p>
+                    <p class="card-text">{{ field["time_start"] }} - {{ field["time_end"] }}</p>
+                    <p class="card-text">{{ field["shortdescription"]}}</p>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+      </div>
+
+      <div class="tab-pane" id="tab-other">
+        <h2 class="card-title">Other</h2>
+          <!--DISPLAY Other ONLY-->
+          <div class="card-columns">
+            {% for field in events %}
+              {% if field["type"] == "Other (read description)" %}
+                <div class="card bg-light">
+                  <div class="card-header"><h4><b>{{ field["name"] }}:</b> {{ field["type"] }}</h4></div>
+                  <img class="homeImage card-img-top" src="/static/other.jpg">
+                  <p class="card-text small" style="margin-top:1.6em">{{ field["location"] }}</p>
+                  <hr>
+                  <div class="card-body" style="margin-top:-1em">
+                    <p class="card-text"><b>{{ field["date"] }}</b></p>
+                    <p class="card-text">{{ field["time_start"] }} - {{ field["time_end"] }}</p>
+                    <p class="card-text">{{ field["shortdescription"]}}</p>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
